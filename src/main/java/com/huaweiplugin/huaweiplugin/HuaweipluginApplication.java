@@ -19,12 +19,12 @@ public class HuaweipluginApplication implements CommandLineRunner {
 		SpringApplication.run(HuaweipluginApplication.class, args);
 	}
 
-//	@Override
+	//	@Override
 	public void run(String... strings) throws Exception {
 
 //		request.login("172.22.172.157","8080","abcd","efgh");
 //		request.regNoNDirectDevice("172.22.172.157","8080","abcd","efgh","asasas");
-//		request.activationStatus("172.22.172.157","8080","abcd","efgh","s");
+		request.activationStatus("172.22.172.157","8080","abcd","efgh","s");
 
 		logger.info("Finished.");
 	}
