@@ -24,7 +24,7 @@ public class HuaweipluginApplication implements CommandLineRunner {
 
 //		request.login("172.22.172.157","8080","abcd","efgh");
 //		request.regNoNDirectDevice("172.22.172.157","8080","abcd","efgh","asasas");
-		request.deleteDirectDevice("172.22.172.157","8080","abcd","efgh","s","sdf");
+//		request.deleteDirectDevice("172.22.172.157","8080","abcd","efgh","ass","sdf");
 
 		logger.info("Finished.");
 	}
