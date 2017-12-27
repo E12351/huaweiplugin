@@ -19,11 +19,14 @@ public class Authorization {
     }
 
     @RequestMapping(value = "proxy/authenticate" ,  method = RequestMethod.POST, produces={"application/json"} )
-    public String login( @RequestBody String body) throws JSONException {
-        JSONObject json = new JSONObject(body);
+    public String login( @RequestHeader("Accept-Encoding") HttpHeaders headers, @RequestBody String body) throws JSONException {
 
+        System.out.println(headers.get("IotMife-Token"));
+
+        JSONObject json = new JSONObject(body);
         System.out.println(json.get("user_name"));
         System.out.println(json.get("password"));
+
         return body;
     }
 }

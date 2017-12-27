@@ -5,9 +5,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.Map;
 
 
 @Service
@@ -29,7 +26,6 @@ public class requests {
         return response;
     }
 
-//    https://server:port/iocm/app/sec/v1.1.0/refreshToken
     public String refreshToken(String IP, String port, Object appID, Object secret, Object refreshToken){
         String walletBalanceUrl = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/refreshToken";
 
