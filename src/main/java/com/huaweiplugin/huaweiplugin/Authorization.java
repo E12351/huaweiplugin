@@ -1,11 +1,9 @@
 package com.huaweiplugin.huaweiplugin;
 
+import org.json.JSONException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
-
-/**
- * Created by Amila on 12/27/2017.
- */
+import org.json.JSONObject;
 
 @RestController
 public class Authorization {
@@ -18,5 +16,14 @@ public class Authorization {
         System.out.println(headers.get("IotMife-RefreshToken"));
 
         return headers.toString();
+    }
+
+    @RequestMapping(value = "proxy/authenticate" ,  method = RequestMethod.POST, produces={"application/json"} )
+    public String login( @RequestBody String body) throws JSONException {
+        JSONObject json = new JSONObject(body);
+
+        System.out.println(json.get("user_name"));
+        System.out.println(json.get("password"));
+        return body;
     }
 }
