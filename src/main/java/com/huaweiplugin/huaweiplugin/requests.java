@@ -5,6 +5,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Map;
 
 
 @Service
@@ -164,5 +167,22 @@ public class requests {
         String response = restTemplate.getForObject(walletBalanceUrl, String.class, httpEntity);
 
         return response;
+    }
+
+    public void deleteDirectDevice(String IP, String port, String deviceId, String appId, String cascade, String accessToken){
+//
+        String walletUrl = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/devices/{"+deviceId+"}?appId={"+appId+"}&cascade={"+cascade+"}";
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        httpHeaders.set("app_key",appId);
+        httpHeaders.set("Authorization","Bearer {"+accessToken+"}");
+        httpHeaders.set("Content-Type", "application/json");
+
+        HttpEntity <String> httpEntity = new HttpEntity <String> (httpHeaders);
+        System.out.println(httpEntity);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(walletUrl, null,httpEntity);
+
     }
 }
