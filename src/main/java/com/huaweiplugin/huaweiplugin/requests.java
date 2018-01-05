@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.sql.rowset.spi.SyncResolver;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,10 +20,6 @@ public class requests {
 
         String urlLogin = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/login";
 
-//        String appId    = com.huaweiplugin.Utils.Constant.APPID;
-//        String secret   = com.huaweiplugin.Utils.Constant.SECRET;
-//        String urlLogin = com.huaweiplugin.Utils.Constant.APP_AUTH;
-
         com.huaweiplugin.Utils.HttpsUtil httpsUtil = new com.huaweiplugin.Utils.HttpsUtil();
 
         httpsUtil.initSSLConfigForTwoWay();
@@ -32,26 +29,22 @@ public class requests {
         param.put("secret", secret);
 
         com.huaweiplugin.Utils.StreamClosedHttpResponse responseLogin = httpsUtil.doPostFormUrlEncodedGetStatusLine(urlLogin, param);
+
         //resolve the value of accessToken from responseLogin.
         Map<String, String> data = new HashMap<>();
         data = com.huaweiplugin.Utils.JsonUtil.jsonString2SimpleObj(responseLogin.getContent(), data.getClass());
-        String accessToken = data.get("accessToken");
-        String refreshToken = data.get("refreshToken");
 
-        System.out.println("accessToken : " + accessToken);
-        System.out.println("refreshToken : " + refreshToken);
+        String state = String.valueOf(responseLogin.getStatusLine());
+        data.put("state",state);
+
 
         return (HashMap) data;
-
-
     }
 
     public HashMap refreshToken(String IP, String port, Object appID, Object secret, Object refreshToken) throws Exception {
 
         String urlRefreshToken = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/refreshToken";
-
         com.huaweiplugin.Utils.HttpsUtil httpsUtil = new com.huaweiplugin.Utils.HttpsUtil();
-
         httpsUtil.initSSLConfigForTwoWay();
 
         Map<String, Object> param_reg = new HashMap<>();
@@ -61,33 +54,15 @@ public class requests {
 
         String jsonRequest = JsonUtil.jsonObj2Sting(param_reg);
         StreamClosedHttpResponse bodyRefreshToken = httpsUtil.doPostJsonGetStatusLine(urlRefreshToken, jsonRequest);
-
         Map<String, String> data = new HashMap<>();
         data = com.huaweiplugin.Utils.JsonUtil.jsonString2SimpleObj(bodyRefreshToken.getContent(), data.getClass());
-//        String accessToken = data.get("accessToken");
-        String refreshTokenN = data.get("refreshToken");
 
-//        System.out.println("accessToken : " + accessToken);
-        System.out.println("refreshToken : " + refreshTokenN);
+        String state = String.valueOf(bodyRefreshToken.getStatusLine());
+        data.put("state",state);
 
         return (HashMap) data;
     }
 
-    public String refreshToken1(String IP, String port, String appID, String secret, String refreshToken){
-
-        String walletBalanceUrl = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/refreshToken";
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Content-Type", "application/json");
-
-        String dataParameter = "appID="+appID+"&secret="+secret+"&refreshToken="+refreshToken;
-
-        HttpEntity<String> httpEntity = new HttpEntity<String>(dataParameter, httpHeaders);
-        System.out.println(httpEntity);
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.postForObject(walletBalanceUrl, httpEntity, String.class);
-        System.out.println(response);
-        return response;
-    }
 
     public String logout(String IP, String port, String accessToken){
 
@@ -107,28 +82,37 @@ public class requests {
         return response;
     }
 
-    public String regDirectDevice(String IP, String port, String appID, String accessToken){
+    public HashMap regDirectDevice(String IP, String port, String appID, String accessToken, String nodeId) throws Exception {
 
-        String walletBalanceUrl = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/devices?appId={"+appID+"}";
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("app_key",appID);
-        httpHeaders.set("Authorization","Bearer {"+accessToken+"}");
-        httpHeaders.set("Content-Type", "application/json");
+        String url = "https://"+IP+":"+port+"/iocm/app/reg/v1.2.0/devices?appId="+appID+"";
 
-        System.out.println(httpHeaders);
+        com.huaweiplugin.Utils.HttpsUtil httpsUtil = new com.huaweiplugin.Utils.HttpsUtil();
+        httpsUtil.initSSLConfigForTwoWay();
 
-        JSONObject json = new JSONObject();
-        json.put("verifyCode"   , "AE10-12424-12414");
-        json.put("nodeId"       , "AE10-12424-12414");
-        json.put("timeout"      ,                300);
+        Map<String, String> hedder = new HashMap<>();
+        hedder.put("app_key",appID);
+        hedder.put("Authorization",accessToken);
+        hedder.put("Content-Type", "application/json");
 
+        Map<String, Object> param_reg = new HashMap<>();
+        param_reg.put("verifyCode",nodeId);
+        param_reg.put("nodeId", nodeId);
+        param_reg.put("timeout", 300);
 
-        HttpEntity <String> httpEntity = new HttpEntity <String> (json.toString(), httpHeaders);
+        String jsonRequest = JsonUtil.jsonObj2Sting(param_reg);
 
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.postForObject(walletBalanceUrl, httpEntity, String.class);
+        StreamClosedHttpResponse bodyRefreshToken = httpsUtil.doPostJsonGetStatusLine(url, hedder, jsonRequest);
 
-        return response;
+        Map<String, String> data = new HashMap<>();
+        data = com.huaweiplugin.Utils.JsonUtil.jsonString2SimpleObj(bodyRefreshToken.getContent(), data.getClass());
+
+//        System.out.println();
+//        System.out.println(bodyRefreshToken.getStatusLine());
+        String state = String.valueOf(bodyRefreshToken.getStatusLine());
+        data.put("state",state);
+        System.out.println(state);
+
+        return (HashMap) data;
     }
 
     public String regNoNDirectDevice(String IP, String port, String appID, String deviceId,String accessToken){

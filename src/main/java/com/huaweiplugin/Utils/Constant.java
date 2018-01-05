@@ -47,12 +47,12 @@ public class Constant {
 //    C:\Users\Amila\Documents\huaweiplugin\src\main\resources\cert
 
     //Paths of certificates.
-    public static String SELFCERTPATH = "/src/main/resources/cert/outgoing.CertwithKey.pkcs12";
-    public static String TRUSTCAPATH = "/src/main/resources/cert/ca.jks";
+    public static String SELFCERTPATH   = "/src/main/resources/cert/outgoing.CertwithKey.pkcs12";
+    public static String TRUSTCAPATH    = "/src/main/resources/cert/ca.jks";
 
     //Password of certificates.
-    public static String SELFCERTPWD = "IoM@1234";
-    public static String TRUSTCAPWD = "Huawei@123";
+    public static String SELFCERTPWD    = "IoM@1234";
+    public static String TRUSTCAPWD     = "Huawei@123";
 
 
 
