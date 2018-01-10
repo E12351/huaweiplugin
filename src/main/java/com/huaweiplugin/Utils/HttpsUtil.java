@@ -291,8 +291,7 @@ public class HttpsUtil extends DefaultHttpClient {
 		return executeHttpRequest(request);
 	}
 
-	public StreamClosedHttpResponse doDeleteGetStatusLine(String url,
-			Map<String, String> headerMap) {
+	public StreamClosedHttpResponse doDeleteGetStatusLine(String url, Map<String, String> headerMap) {
 		HttpResponse response = doDelete(url, headerMap);
 		if (null == response) {
 			System.out.println("The response body is null.");

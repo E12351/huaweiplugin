@@ -1,6 +1,5 @@
 package com.huaweiplugin.huaweiplugin;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,6 +48,35 @@ public class HuaweipluginApplicationTests {
 		System.out.println("verifyCode 	: "+ responce.get("verifyCode") );
 		System.out.println("psk 		: "+ responce.get("psk") );
 		System.out.println("deviceId 	: "+ responce.get("deviceId") );
+
+	}
+
+	@Test
+	public void logoutTest() throws Exception {
+		request.logout("211.25.75.100","8743",HuaweipluginApplicationTests.accesstoken);
+	}
+
+	@Test
+	public void deleteTest() throws Exception {
+		HashMap responce = request.regDirectDevice("211.25.75.100","8743","L0sBaFLJKiXfdyXyxzPN1PMY5Q8a",HuaweipluginApplicationTests.accesstoken, "xxxx-xxxx-xxxxx-xxx1");
+		assert responce.get("state") != "HTTP/1.1 200 OK" : responce.get("state");
+
+		String deviceID = String.valueOf(responce.get("deviceId"));
+
+		request.deleteDirectDevice("211.25.75.100","8743", deviceID, "L0sBaFLJKiXfdyXyxzPN1PMY5Q8a",HuaweipluginApplicationTests.accesstoken);
+	}
+
+	@Test
+	public void activeStateTest() throws Exception {
+
+		HashMap responce = request.regDirectDevice("211.25.75.100","8743","L0sBaFLJKiXfdyXyxzPN1PMY5Q8a",HuaweipluginApplicationTests.accesstoken, "xxxx-xxxx-xxxxx-xxx1");
+		assert responce.get("state") != "HTTP/1.1 200 OK" : responce.get("state");
+
+		String deviceID = String.valueOf(responce.get("deviceId"));
+
+		Map responceState = request.activationStatus("211.25.75.100","8743", deviceID, "L0sBaFLJKiXfdyXyxzPN1PMY5Q8a",HuaweipluginApplicationTests.accesstoken);
+		System.out.println("deviceId 	: "+ responceState.get("deviceId") );
+		System.out.println("activated 	: "+ responceState.get("activated") );
 
 	}
 
