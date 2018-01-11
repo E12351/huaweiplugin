@@ -57,8 +57,12 @@ public class Constant {
     public static String SELFCERTPWD    = "IoM@1234";
     public static String TRUSTCAPWD     = "Huawei@123";
 
-
-
+    //*************************** The following constants are related with mqtt client *******************************//
+    public static String BROKER         = "tcp://127.0.0.1:1883";
+    public static String BROKER_PSWRD   = "rabbit";
+    public static String BROKER_USER    = "rabbit";
+//    public static String BROKER_SUB     = "topic";
+    public static String BROKER_SUB     = "+/custom/pcs/common";
 
 
 

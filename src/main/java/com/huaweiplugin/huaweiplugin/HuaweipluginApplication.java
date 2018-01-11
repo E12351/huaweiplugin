@@ -1,5 +1,7 @@
 package com.huaweiplugin.huaweiplugin;
 
+
+
 import com.huaweiplugin.Utils.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @EnableScheduling
+
 public class HuaweipluginApplication implements CommandLineRunner{
 
 	@Autowired
@@ -20,6 +23,9 @@ public class HuaweipluginApplication implements CommandLineRunner{
 
 	@Autowired
 	private requests request;
+
+	@Autowired
+	private mqttUtils mqttutils;
 
 	private static final Logger log = LoggerFactory.getLogger(HuaweipluginApplication.class);
 
@@ -40,5 +46,10 @@ public class HuaweipluginApplication implements CommandLineRunner{
 
 		log.info("accessToken : {}  refreshToken : {}",accessToken,refreshToken);
 
+//		MqttPublishDto mqttPublishDto = new MqttPublishDto();
+//		mqttPublishDto.setTopic("topic");
+//		mqttPublishDto.setMessage("Onna enooooo");
+//		mqttutils.sendMsg( mqttPublishDto);
 	}
+
 }
