@@ -16,7 +16,7 @@ import java.util.HashMap;
 @SpringBootApplication
 @EnableScheduling
 
-public class HuaweipluginApplication implements CommandLineRunner{
+public class Application implements CommandLineRunner{
 
 	@Autowired
 	private AuthHandle authHandle;
@@ -27,10 +27,10 @@ public class HuaweipluginApplication implements CommandLineRunner{
 	@Autowired
 	private mqttUtils mqttutils;
 
-	private static final Logger log = LoggerFactory.getLogger(HuaweipluginApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(HuaweipluginApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
@@ -46,10 +46,6 @@ public class HuaweipluginApplication implements CommandLineRunner{
 
 		log.info("accessToken : {}  refreshToken : {}",accessToken,refreshToken);
 
-//		MqttPublishDto mqttPublishDto = new MqttPublishDto();
-//		mqttPublishDto.setTopic("topic");
-//		mqttPublishDto.setMessage("Onna enooooo");
-//		mqttutils.sendMsg( mqttPublishDto);
 	}
 
 }

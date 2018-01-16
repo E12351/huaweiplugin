@@ -17,22 +17,34 @@ public class sqlTest {
 
     @Before
     public void init(){
-        repository.save(new authData("Jack", "Smith"));
-        repository.save(new authData("Adam", "Johnson"));
-        repository.save(new authData("Kim", "Smith"));
-        repository.save(new authData("David", "Williams"));
-        repository.save(new authData("Peter", "Davis"));
+        repository.save(new authData(1,"Huawei", "L0sBaFLJKiXfdyXyxzPN1PMY5Q8a","fEL5Fjc8eIOR7Gj2pCzoC2E_voga"));
+        repository.save(new authData(2,"Huawei", "L0sBaFLJKiXfdyXyxzPN1PMY5Q8a","fEL5Fjc8eIOR7Gj2pCzoC2E_voga"));
     }
 
     @Test
     public void saveTest(){
-        System.out.println(String.valueOf(repository.findByLastName("Johnson")));
-        System.out.println(repository.findOne((long) 3).toString());
+        System.out.println(repository.findOne((long) 1).toString());
+
+        System.out.println(repository.findAll());
+
+    }
+
+    @Test
+    public void updateTest(){
+        repository.save(new authData(2,"Huawei", "test","update"));
+        System.out.println(repository.findOne((long) 2).toString());
+        System.out.println(repository.findAll());
+
+    }
+
+    @Test
+    public void findTest(){
+        System.out.println(repository.hashCode());
 
     }
 
     @After
     public void clean(){
-        repository.deleteAll();
+//        repository.deleteAll();
     }
 }

@@ -13,27 +13,25 @@ import java.util.Map;
 @RestController
 public class CallBackHandle {
 
-    private static final Logger log = LoggerFactory.getLogger(HuaweipluginApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private mqttUtils mqttutils;
 
-    @Value("${topic.prefix}")
+    @Value("${topic.prefix.callBack}")
     private String prefix;
 
     @RequestMapping(value = "device/change" ,  method = RequestMethod.POST, produces={"application/json"} )
-    public String login(@RequestBody String body) throws Exception {
+    public boolean login(@RequestBody String body) throws Exception {
 
         Map<String, String> data = new HashMap<>();
         data = com.huaweiplugin.Utils.JsonUtil.jsonString2SimpleObj(body, data.getClass());
 
         MqttPublishDto mqttPublishDto = new MqttPublishDto();
         mqttPublishDto.setTopic(prefix);
-        mqttPublishDto.setMessage("Onna enooooo.. menna awooo");
+        mqttPublishDto.setMessage(String.valueOf(data));
         mqttutils.sendMsg( mqttPublishDto, data.get("deviceId"));
 
-        log.info("Msg Received: {}",data);
-
-        return body;
+        return true;
     }
 }

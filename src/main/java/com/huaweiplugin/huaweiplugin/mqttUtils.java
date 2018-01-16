@@ -14,7 +14,7 @@ import com.huaweiplugin.Utils.Constant;
 @Service
 public class mqttUtils  {
 
-    private static final Logger log = LoggerFactory.getLogger(HuaweipluginApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private MqttClient sampleClient;
@@ -27,7 +27,7 @@ public class mqttUtils  {
         message.setQos(0);
         sampleClient.publish(topic, message);
 
-        log.info("Msg Sent. {}  {}",topic,content);
+        log.info("Msg Sent: {}  {}",topic,content);
 
     }
 

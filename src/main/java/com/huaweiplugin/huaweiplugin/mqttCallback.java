@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class mqttCallback implements MqttCallback {
 
-    private static final Logger log = LoggerFactory.getLogger(HuaweipluginApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Override
     public void connectionLost(Throwable cause) {

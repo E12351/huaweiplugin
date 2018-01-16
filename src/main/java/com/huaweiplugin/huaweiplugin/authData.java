@@ -5,8 +5,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,26 +13,35 @@ import javax.persistence.Table;
 public class authData implements Serializable {
 
     private static final long serialVersionUID = -3009157732242241606L;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private long id;
 
-    @Column(name = "firstname")
-    private String firstName;
+    @Column(name = "platform")
+    private String platform;
 
-    @Column(name = "lastname")
-    private String lastName;
+    @Column(name = "appId")
+    private String appId;
+
+    @Column(name = "secret")
+    private String secret;
 
     protected authData() {
     }
 
-    public authData(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public authData(long id,String platform, String appId, String secret) {
+        this.platform = platform;
+        this.appId = appId;
+        this.secret = secret;
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return String.format("Customer[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+        return String.format("authData[id=%d, platform='%s', appId='%s' , secret='%s']", id, platform, appId, secret);
     }
 }
