@@ -22,7 +22,7 @@ public class Constant {
     public static String BROKER         = "tcp://127.0.0.1:1883";
     public static String BROKER_PSWRD   = "rabbit";
     public static String BROKER_USER    = "rabbit";
-    public static String BROKER_SUB     = "+/custom/pcs/common";
+//    public static String BROKER_SUB     = "+/custom/pcs/common";
 
 
 //    //*************************** The following constants do not need to be modified *********************************//

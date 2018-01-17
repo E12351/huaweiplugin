@@ -1,8 +1,10 @@
 package com.huaweiplugin.huaweiplugin;
 
+import com.huaweiplugin.Utils.Constant;
 import com.huaweiplugin.Utils.JsonUtil;
 import com.huaweiplugin.Utils.StreamClosedHttpResponse;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ import java.util.Map;
 
 @Service
 public class requests {
+
+    @Autowired
+    private AuthHandle authHandle;
 
     public HashMap login(String IP, String port,String appID, String secret) throws Exception {
 
@@ -63,7 +68,11 @@ public class requests {
     }
 
 
-    public void logout(String IP, String port, String accessToken) throws Exception {
+    public void logout() throws Exception {
+
+        String IP = Constant.URL;
+        String port = Constant.PORT;
+        String accessToken = authHandle.getaccessToken();
 
         String url = "https://"+IP+":"+port+"/iocm/app/sec/v1.1.0/logout";
 
@@ -83,7 +92,13 @@ public class requests {
         System.out.println(bodyRefreshToken);
     }
 
-    public HashMap regDirectDevice(String IP, String port, String appID, String accessToken, String nodeId) throws Exception {
+    public HashMap regDirectDevice(String nodeId) throws Exception {
+
+        String IP = Constant.URL;
+        String port = Constant.PORT;
+        String appID = Constant.APPID;
+
+        String accessToken = authHandle.getaccessToken();
 
         String url = "https://"+IP+":"+port+"/iocm/app/reg/v1.2.0/devices?appId="+appID+"";
 

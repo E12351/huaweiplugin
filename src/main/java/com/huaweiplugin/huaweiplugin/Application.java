@@ -19,13 +19,10 @@ import java.util.HashMap;
 public class Application implements CommandLineRunner{
 
 	@Autowired
-	private AuthHandle authHandle;
+	public AuthHandle authHandle;
 
 	@Autowired
-	private requests request;
-
-	@Autowired
-	private mqttUtils mqttutils;
+	public requests request;
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 

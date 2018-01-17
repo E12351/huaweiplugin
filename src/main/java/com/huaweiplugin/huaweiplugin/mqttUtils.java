@@ -6,18 +6,25 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.huaweiplugin.Utils.Constant;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class mqttUtils  {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
+    @Value("${topic.sub}")
+    private String BROKER_SUB;
+
     @Autowired
-    private MqttClient sampleClient;
+    public MqttClient Client;
 
     public void sendMsg(MqttPublishDto mqttDto, String endpoint) throws MqttException {
 
@@ -25,7 +32,7 @@ public class mqttUtils  {
         String content      = mqttDto.getMessage();
         MqttMessage message = new MqttMessage(content.getBytes());
         message.setQos(0);
-        sampleClient.publish(topic, message);
+        Client.publish(topic, message);
 
         log.info("Msg Sent: {}  {}",topic,content);
 
@@ -47,9 +54,45 @@ public class mqttUtils  {
         sampleClient.setCallback(new mqttCallback());
         sampleClient.connect(connOpts);
 
-        sampleClient.subscribe(Constant.BROKER_SUB);
+        sampleClient.subscribe(BROKER_SUB);
 
         return sampleClient;
+    }
+
+    public static Map<String, String> splitToic(String Topic) throws Exception{
+        Map<String, String> topic = new HashMap<>();
+
+        String[] parts = Topic.split("/");
+        topic.put("prefix",parts[0]);
+        topic.put("method",parts[1]);
+        topic.put("deviceId",parts[2]);
+        return topic;
+    }
+
+    public static void hnadleMsg(String topic, MqttMessage message) throws Exception {
+
+        Map topicParts = mqttUtils.splitToic(topic);
+
+        String method = (String) topicParts.get("method");
+        String deviceId = (String) topicParts.get("deviceId");
+
+        switch (method){
+            case "direct":
+                // send proper request with deviceId.
+                log.info("direct excecuted.!");
+                HashMap responce = new requests().regDirectDevice(deviceId);
+
+                System.out.println("verifyCode 	: "+ responce.get("verifyCode") );
+                System.out.println("psk 		: "+ responce.get("psk") );
+                System.out.println("deviceId 	: "+ responce.get("deviceId") );
+
+                break;
+
+            case "NoNdirect":
+                log.info("NoN direct excecuted.!");
+                break;
+        }
+
     }
 
 }
