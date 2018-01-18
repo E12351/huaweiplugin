@@ -24,6 +24,6 @@ public class mqttTest {
         MqttPublishDto mqttPublishDto = new MqttPublishDto();
         mqttPublishDto.setTopic("topic/"+prefix);
         mqttPublishDto.setMessage("Onna enooooo");
-        mqttutils.sendMsg( mqttPublishDto, "12354");
+        mqttutils.sendMsg( mqttPublishDto);
     }
 }

@@ -15,14 +15,13 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @EnableScheduling
-
 public class Application implements CommandLineRunner{
 
 	@Autowired
 	public AuthHandle authHandle;
 
 	@Autowired
-	public requests request;
+	private requests request;
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -33,7 +32,6 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... strings) throws Exception {
 		log.info("Huawei Interaction Service started.");
-
 		HashMap data = request.login(Constant.URL,Constant.PORT, Constant.APPID,Constant.SECRET);
 		String accessToken = String.valueOf(data.get("accessToken"));
 		String refreshToken = String.valueOf(data.get("refreshToken"));

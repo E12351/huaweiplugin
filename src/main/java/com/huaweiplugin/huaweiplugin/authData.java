@@ -30,7 +30,7 @@ public class authData implements Serializable {
     @Column(name = "secret")
     private String secret;
 
-    protected authData() {
+    public authData() {
     }
 
     public authData(long id,String platform, String appId, String secret) {

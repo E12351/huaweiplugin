@@ -113,7 +113,7 @@ public class requests {
         Map<String, Object> param_reg = new HashMap<>();
         param_reg.put("verifyCode",nodeId);
         param_reg.put("nodeId", nodeId);
-        param_reg.put("timeout", 300);
+        param_reg.put("timeout", 0);
 
         String jsonRequest = JsonUtil.jsonObj2Sting(param_reg);
 
