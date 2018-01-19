@@ -30,24 +30,34 @@ public class CallBackHandle {
         data = com.huaweiplugin.Utils.JsonUtil.jsonString2SimpleObj(body, data.getClass());
 
         String notifyType    = data.get("notifyType");
-
+//        System.out.println("-------> : "+notifyType);
         switch (notifyType){
-            case "deviceDataChanged":{
+            case "deviceDataChanged":
+            {
                 String deviceId     = data.get("deviceId");
                 String event        = data.get("data");
                 log.info("deviceDataChanged: deviceId :{} data : {}",deviceId,event);
-
+                break;
             }
 
-            case "bindDevice":{
+            case "bindDevice":
+            {
                 String deviceId     = data.get("deviceId");
                 log.info("bindDevice: {}",deviceId);
+                break;
 
             }
+
+            case "deviceEvent":
+            {
+                log.info("deviceEvent: {}");
+                break;
+
+            }
+
             default:
                 log.info("notifyType Error: {}",data);
         }
-
 
         mqttPublishDto.setTopic(topic);
         mqttPublishDto.setMessage(String.valueOf(data));

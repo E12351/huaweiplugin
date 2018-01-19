@@ -11,8 +11,8 @@ public class Constant {
     public static final String SECRET = "fEL5Fjc8eIOR7Gj2pCzoC2E_voga";
 
     //Paths of certificates.
-    public static String SELFCERTPATH   = "/src/main/resources/cert/outgoing.CertwithKey.pkcs12";
-    public static String TRUSTCAPATH    = "/src/main/resources/cert/ca.jks";
+    public static String SELFCERTPATH   = "/cert/outgoing.CertwithKey.pkcs12";
+    public static String TRUSTCAPATH    = "/cert/ca.jks";
 
     //Password of certificates.
     public static String SELFCERTPWD    = "IoM@1234";
