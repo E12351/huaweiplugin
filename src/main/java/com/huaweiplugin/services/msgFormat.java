@@ -1,5 +1,6 @@
-package com.huaweiplugin.huaweiplugin;
+package com.huaweiplugin.services;
 
+import com.huaweiplugin.huaweiplugin.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

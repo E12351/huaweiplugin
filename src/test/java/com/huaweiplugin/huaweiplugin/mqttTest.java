@@ -1,6 +1,7 @@
 package com.huaweiplugin.huaweiplugin;
 
 import com.huaweiplugin.Dto.MqttPublishDto;
+import com.huaweiplugin.services.mqttUtils;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

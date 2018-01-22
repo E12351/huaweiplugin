@@ -1,19 +1,22 @@
-package com.huaweiplugin.huaweiplugin;
+package com.huaweiplugin.services;
 
 import com.huaweiplugin.Utils.Constant;
 import com.huaweiplugin.Utils.JsonUtil;
 import com.huaweiplugin.Utils.StreamClosedHttpResponse;
+import com.huaweiplugin.huaweiplugin.AuthHandle;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service("requests")
+@Service
 public class requests {
 
     @Autowired
