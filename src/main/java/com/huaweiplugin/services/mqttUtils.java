@@ -2,7 +2,7 @@ package com.huaweiplugin.services;
 
 import com.huaweiplugin.Dto.MqttPublishDto;
 import com.huaweiplugin.huaweiplugin.Application;
-import com.huaweiplugin.huaweiplugin.Repository;
+import com.huaweiplugin.Repository.RepositoryDeviceData;
 import com.huaweiplugin.huaweiplugin.deviceData;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -41,7 +41,7 @@ public class mqttUtils  {
     private mqttUtils mqttutils;
 
     @Autowired
-    private Repository repository;
+    private RepositoryDeviceData repository;
 
 //    @Autowired
 //    private requests req;

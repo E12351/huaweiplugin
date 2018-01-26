@@ -25,6 +25,7 @@ public class deviceData implements Serializable {
     private String psk;
 
     public deviceData() {
+
     }
 
     public deviceData( String mac, String deviceId, String verifyCode, String psk) {

@@ -6,6 +6,8 @@ public class Constant {
     public static final String URL = "211.25.75.100";
     public static final String PORT = "8743";
 
+    public static final String CALLBACK = "http://iotconnect.dialog.lk/inbound/huaweiOBD/";
+
     //please replace the appId and secret, when you use the demo.
     public static final String APPID = "L0sBaFLJKiXfdyXyxzPN1PMY5Q8a";
     public static final String SECRET = "fEL5Fjc8eIOR7Gj2pCzoC2E_voga";
