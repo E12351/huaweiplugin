@@ -1,8 +1,9 @@
 package com.huaweiplugin.huaweiplugin;
 
 
+import com.huaweiplugin.Dto.AuthHandle;
 import com.huaweiplugin.Utils.Constant;
-import com.huaweiplugin.services.requests;
+import com.huaweiplugin.request.requestAuth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 
 @SpringBootApplication
 @ComponentScan({"com.huaweiplugin"})
+@EntityScan({"com.huaweiplugin"})
 @EnableJpaRepositories("com")
 @EnableScheduling
 public class Application implements CommandLineRunner{
@@ -26,7 +28,7 @@ public class Application implements CommandLineRunner{
 	public AuthHandle authHandle;
 
 	@Autowired
-	private requests request;
+	private requestAuth requestauth;
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -37,7 +39,7 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... strings) throws Exception {
 		log.info("Huawei Interaction Service started.");
-		HashMap data = request.login(Constant.URL,Constant.PORT, Constant.APPID,Constant.SECRET);
+		HashMap data = requestauth.login(Constant.URL,Constant.PORT, Constant.APPID,Constant.SECRET);
 		String accessToken = String.valueOf(data.get("accessToken"));
 		String refreshToken = String.valueOf(data.get("refreshToken"));
 

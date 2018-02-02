@@ -3,7 +3,8 @@ package com.huaweiplugin.services;
 import com.huaweiplugin.Dto.MqttPublishDto;
 import com.huaweiplugin.huaweiplugin.Application;
 import com.huaweiplugin.Repository.RepositoryDeviceData;
-import com.huaweiplugin.huaweiplugin.deviceData;
+import com.huaweiplugin.Entity.deviceData;
+import com.huaweiplugin.request.DeviceManagement;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class mqttUtils  {
     public MqttClient Client;
 
     @Autowired
-    private requests req;
+    private DeviceManagement devicemanagement;
 
     @Autowired
     private mqttUtils mqttutils;
@@ -123,7 +124,7 @@ public class mqttUtils  {
                 log.info("direct executed.");
 
                 String mac = (String) data.get("mac");
-                HashMap responce = req.regDirectDevice(mac);
+                HashMap responce = devicemanagement.regDirectDevice(mac);
 
                 String verifyCode = (String) responce.get("verifyCode");
                 String psk = (String) responce.get("psk");

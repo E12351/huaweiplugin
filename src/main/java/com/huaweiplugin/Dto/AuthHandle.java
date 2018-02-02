@@ -1,4 +1,4 @@
-package com.huaweiplugin.huaweiplugin;
+package com.huaweiplugin.Dto;
 
 
 import org.springframework.context.annotation.Scope;

@@ -1,6 +1,6 @@
 package com.huaweiplugin.Repository;
 
-import com.huaweiplugin.huaweiplugin.deviceData;
+import com.huaweiplugin.Entity.deviceData;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

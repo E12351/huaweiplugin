@@ -1,4 +1,4 @@
-package com.huaweiplugin.huaweiplugin;
+package com.huaweiplugin.Entity;
 
 
 import javax.persistence.*;

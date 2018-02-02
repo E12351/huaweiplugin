@@ -1,8 +1,12 @@
 package com.huaweiplugin.huaweiplugin;
 
 
+import com.huaweiplugin.Entity.deviceData;
 import com.huaweiplugin.Repository.RepositoryDeviceData;
-import com.huaweiplugin.services.requests;
+import com.huaweiplugin.Utils.Constant;
+import com.huaweiplugin.request.DataCollection;
+import com.huaweiplugin.request.DeviceManagement;
+import com.huaweiplugin.request.requestAuth;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +25,13 @@ public class OBD2_Test {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
-    public requests request;
+    private requestAuth requestauth;
+
+    @Autowired
+    private DeviceManagement devicemanagement;
+
+    @Autowired
+    private DataCollection datacollection;
 
     @Autowired
     RepositoryDeviceData repository;
@@ -31,17 +41,16 @@ public class OBD2_Test {
 
     @Before
     public void setup() throws Exception {
-        HashMap data = request.login("211.25.75.100","8743","L0sBaFLJKiXfdyXyxzPN1PMY5Q8a","fEL5Fjc8eIOR7Gj2pCzoC2E_voga");
+        HashMap data = requestauth.login("211.25.75.100","8743","L0sBaFLJKiXfdyXyxzPN1PMY5Q8a","fEL5Fjc8eIOR7Gj2pCzoC2E_voga");
         assert data.get("state") != "HTTP/1.1 200 OK" : data.get("state");
         String accessToken = String.valueOf(data.get("accessToken"));
         String refreshToken = String.valueOf(data.get("refreshToken"));
         HuaweipluginApplicationTests.accesstoken = accessToken;
         HuaweipluginApplicationTests.refreshtoken = refreshToken;
 
-        request.subcribe("deviceInfoChanged");
-        request.subcribe("deviceDataChanged");
-        request.subcribe("deviceAdded");
-
+        datacollection.subcribe(Constant.DEVICE_INFO_CHANGED);
+        datacollection.subcribe(Constant.DEVICE_DATA_CHANGED);
+        datacollection.subcribe(Constant.DEVICE_ADDED);
 
     }
 
@@ -51,17 +60,17 @@ public class OBD2_Test {
         String SN2 = "23803121497080952932";
         String SN3 = "61519419362392885558";
 
-        HashMap responce1 = request.regDirectDevice(SN1);
+        HashMap responce1 = devicemanagement.regDirectDevice(SN1);
         log.info("SN : " + SN1 + "State : " + responce1.get("state") );
         repository.save(new deviceData(SN1,responce1.get("deviceId").toString(),responce1.get("verifyCode").toString(),responce1.get("psk").toString()));
 
-        request.deviceServiceInvocation("Discovery", responce1.get("deviceId").toString());
+        datacollection.deviceServiceInvocation("Discovery", responce1.get("deviceId").toString());
 
-        HashMap responce2 = request.regDirectDevice(SN2);
+        HashMap responce2 = devicemanagement.regDirectDevice(SN2);
         log.info("SN : " + SN2 + "State : " + responce2.get("state") );
         repository.save(new deviceData(SN2,responce2.get("deviceId").toString(),responce2.get("verifyCode").toString(),responce2.get("psk").toString()));
 
-        HashMap responce3 = request.regDirectDevice(SN3);
+        HashMap responce3 = devicemanagement.regDirectDevice(SN3);
         log.info("SN : " + SN3 + "State : " + responce3.get("state") );
         repository.save(new deviceData(SN3,responce3.get("deviceId").toString(),responce3.get("verifyCode").toString(),responce3.get("psk").toString()));
 

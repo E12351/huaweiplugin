@@ -1,5 +1,7 @@
 package com.huaweiplugin.huaweiplugin;
 
+import com.huaweiplugin.Entity.authData;
+import com.huaweiplugin.Entity.deviceData;
 import com.huaweiplugin.Repository.RepositoryAuthData;
 import com.huaweiplugin.Repository.RepositoryDeviceData;
 import org.junit.After;

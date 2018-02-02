@@ -4,8 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.huaweiplugin.Dto.AuthHandle;
 import com.huaweiplugin.Utils.Constant;
-import com.huaweiplugin.services.requests;
+import com.huaweiplugin.request.requestAuth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class ScheduledTasks {
 
     @Autowired
-    private requests request;
+    private requestAuth requestauth;
 
     @Autowired
     private AuthHandle authHandle;
@@ -29,7 +30,7 @@ public class ScheduledTasks {
     public void reportCurrentTime() throws Exception {
 
         String refreshtoken = authHandle.getrefreshToken();
-        HashMap datarefreshToken  = request.refreshToken(Constant.URL,Constant.PORT, Constant.APPID,Constant.SECRET,refreshtoken);
+        HashMap datarefreshToken  = requestauth.refreshToken(Constant.URL,Constant.PORT, Constant.APPID,Constant.SECRET,refreshtoken);
 
         String newrefreshToken  = String.valueOf(datarefreshToken.get("refreshToken"));
         String newaccessToken  = String.valueOf(datarefreshToken.get("accessToken"));
