@@ -3,7 +3,7 @@ package com.huaweiplugin.huaweiplugin;
 
 import com.huaweiplugin.Entity.deviceData;
 import com.huaweiplugin.Repository.RepositoryDeviceData;
-import com.huaweiplugin.Utils.Constant;
+import com.huaweiplugin.Parameter.Constant;
 import com.huaweiplugin.request.DataCollection;
 import com.huaweiplugin.request.DeviceManagement;
 import com.huaweiplugin.request.requestAuth;

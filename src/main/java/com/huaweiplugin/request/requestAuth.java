@@ -1,7 +1,7 @@
 package com.huaweiplugin.request;
 
 import com.huaweiplugin.Dto.AuthHandle;
-import com.huaweiplugin.Utils.Constant;
+import com.huaweiplugin.Parameter.Constant;
 import com.huaweiplugin.Utils.JsonUtil;
 import com.huaweiplugin.Utils.StreamClosedHttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;

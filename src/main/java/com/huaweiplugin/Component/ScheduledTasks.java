@@ -1,11 +1,11 @@
-package com.huaweiplugin.huaweiplugin;
+package com.huaweiplugin.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
 import com.huaweiplugin.Dto.AuthHandle;
-import com.huaweiplugin.Utils.Constant;
+import com.huaweiplugin.Parameter.Constant;
 import com.huaweiplugin.request.requestAuth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -13,24 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import com.huaweiplugin.Utils.JsonUtil;
-import com.huaweiplugin.Utils.Constant;
+import com.huaweiplugin.Parameter.Constant;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//@Controller
 @Service
 public class mqttUtils  {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-    // topic initialize from broker perspective.
     @Value("${topic.pub}")
     private String BROKER_SUB;
-
-//    @Value("${topic.sub}")
-//    private String sub;
 
     @Autowired
     public MqttClient Client;
@@ -43,9 +38,6 @@ public class mqttUtils  {
 
     @Autowired
     private RepositoryDeviceData repository;
-
-//    @Autowired
-//    private requests req;
 
     public void sendMsg(MqttPublishDto mqttDto) throws MqttException {
 
