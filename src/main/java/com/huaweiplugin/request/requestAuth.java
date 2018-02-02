@@ -1,6 +1,6 @@
 package com.huaweiplugin.request;
 
-import com.huaweiplugin.Dto.AuthHandle;
+import com.huaweiplugin.Parameter.AuthHandle;
 import com.huaweiplugin.Parameter.Constant;
 import com.huaweiplugin.Utils.JsonUtil;
 import com.huaweiplugin.Utils.StreamClosedHttpResponse;
